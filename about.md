@@ -4,7 +4,7 @@ title: about
 permalink: /about/
 ---
 
-<img class="col one right" src="img/prof_pic.jpg">
+<img class="col one right" src="https://github.com/hyaluronicc/hyaluronicc.github.io/blob/master/img/prof_pic.jpg">
 
 <br/>
 Write your biography here. Tell the world about yourself. Link to your favorite <a href="http://reddit.com" target="blank">subreddit</a>. 
