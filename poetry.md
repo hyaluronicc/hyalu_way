@@ -2,7 +2,7 @@
 layout: page
 permalink: /poetry/
 title: poetry
-description: It's a barnum and bailey world Just as phony as it can be
+description: It's a barnum and bailey world
 ---
 
 <ul class="post-list">
