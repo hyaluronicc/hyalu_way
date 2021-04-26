@@ -4,7 +4,7 @@ title: about
 permalink: /about/
 ---
 
-<img class="img-thumbnail" src="/img/1.jpg"/>
+<img class="col one right" src="/img/prof_pic.jpg" width="200" height="300"/>
 
 <br/>
 Write your biography here. Tell the world about yourself. Link to your favorite <a href="http://reddit.com" target="blank">subreddit</a>. 
