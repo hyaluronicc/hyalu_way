@@ -7,11 +7,14 @@ permalink: /about/
 <img class="col one right" src="/img/prof_pic.jpg" width="200" height="300"/>
 
 <br/>
-Write your biography here. Tell the world about yourself. Link to your favorite <a href="http://reddit.com" target="blank">subreddit</a>. 
+학습의 일상화, 몰입 및 집중, 중단기 목표 및 계획 선호, 내일이 기대됨, 가장 따뜻한 로봇, 4계절 다이어터, 관심 음식 my favorite <a href="https://www.youtube.com/watch?v=kP92TYmHq7Y" target="blank">diet food</a>. 
 
-Link to your social media connections, too. This theme is set up to use <a href="http://fortawesome.github.io/Font-Awesome/" target="blank">Font Awesome icons</a>, like the ones below. Add your facebook, twitter, linkedin, or just disable all of them. 
+Data Engineer, Data Warehouse, E-commerce, ETL, SQL, NLP
 
 
+<br/>
+<br/>
+<br/>
 <br/>
 <br/>
 <br/>
