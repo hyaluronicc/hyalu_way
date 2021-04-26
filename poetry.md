@@ -2,7 +2,10 @@
 layout: page
 permalink: /poetry/
 title: poetry
-description: Showcase your writing, short stories, or poems. Replace this text with your description.
+description: It's a barnum and bailey world
+Just as phony as it can be
+But it wouldn't be make-believe
+If you believed in me
 ---
 
 <ul class="post-list">
