@@ -100,5 +100,17 @@ select * from shoes;
 
 
 # Step 6: Load sample data from Amazon S3
+일단 S3에 데이터를 먼저 옮겨 놓는 걸 해본다.
 
+tickitdb.zip 파일을 로컬로 받아서 압축을 푼다. 개별 파일을 Amazon S3 **버킷 만들기**를 통해서 테스트 버킷을 하나 생성한다. 객체로 **tickit**을 만들고 그 안에다 tickit 개별 파일을 모두 업로드한다. 간혹 업로드 실패하는 파일도 있는데 이 경우 다시 업로드 하면 올라감. 사실 이 부분도 다 ETL 작업을 하면 자동으로 올리게 됨.
+
+Redshift에서 ..
+1. 테이블을 생성함.
+* users
+* venue
+* category
+* date
+* event
+* listing
+* 
 
