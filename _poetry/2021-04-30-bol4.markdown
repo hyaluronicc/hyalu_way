@@ -36,8 +36,8 @@ date: 2021-04-30 22:00:00
 길고 긴 삶을 살아가는 시. 캄캄한 밤을 헤쳐나가야 했던 마음을 담은 노래. 나에겐 꼭 그렇게 들린다. 나에게 좋은 노래. 그리고 그 시절 아팠던 나를 꼭 안아줄 수 있는 노래. 
 
 <br>
-<img class="col two" src="/img/bol4.png" width="500" height="300"/>
-<img class="col one" src="/img/bol42.png" width="500" height="300"/>
+<img class="col three" src="/img/bol4.png" width="500" height="300"/>
+<img class="col three" src="/img/bol42.png" width="500" height="300"/>
 <br>
 
 나는 한때 내가 이 세상에 사라지길 바랬어
