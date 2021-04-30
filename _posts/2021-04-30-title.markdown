@@ -7,7 +7,7 @@ description: AWS Redshift 기본
 
 기본적으로 따라가기 좋은 예제는 공식 가이드였다.
 
-https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html
+<a href="https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html" target="blank">https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html</a>
 
 여길 정독해서 실습을 따라해보면 되는데 Redshift 상의 쿼리 에디터 뿐 아니라 AWS 환경 밖에서 SQL client로도 연결을 진행해봤다.
 
@@ -25,7 +25,7 @@ Identity and Access Management = IAM
 
 ### **To create an IAM role for Amazon Redshift**
 
-1. AWS IAM 콘솔로 들어간다. https://console.aws.amazon.com/iam/
+1. AWS IAM 콘솔로 들어간다. <a href="https://console.aws.amazon.com/iam/" target="blank">https://console.aws.amazon.com/iam/</a>
 
 2. 네비게이션 바에서 **역할** 선택
 3. **역할 만들기** 선택
@@ -58,7 +58,8 @@ Identity and Access Management = IAM
 Redshift 내에서 모든 쿼리 처리를 다 한다면 굳이 상관없겠지만(클러스터에 VPC-virtual private cloud 기반 Amazon VPC 서비스를 사용해 접근한다면 상관없음), SQL 클라이언트를 사용해 클러스터로 접근하려면 inbound 접근을 줘야 한다. 
 
 1. 이 경우 vpc 콘솔로 들어간다.
- https://console.aws.amazon.com/vpc/ 
+ 
+ <a href="https://console.aws.amazon.com/vpc/ " target="blank">https://console.aws.amazon.com/vpc/</a>
 2. 보안 그룹 으로 들어가서 ID를 눌러준다.
 3. 인바운드 규칙 편집 클릭
 4. 규칙 추가
