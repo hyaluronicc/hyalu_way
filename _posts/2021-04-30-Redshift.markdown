@@ -112,5 +112,16 @@ Redshift에서 ..
 * date
 * event
 * listing
-* 
+* sales
+2. COPY 명령으로 S3에서 데이터를 로드함
+{% highlight sql %}
+
+copy users from 's3://<myBucket>/tickit/allusers_pipe.txt' 
+credentials 'aws_iam_role=<iam-role-arn>' 
+delimiter '|' region '<aws-region>';
+
+{% endhighlight %}
+
+이런 식으로 Redshift의 빈 테이블 7개 테이블에 S3 데이터를 로드하면 됨
+
 
