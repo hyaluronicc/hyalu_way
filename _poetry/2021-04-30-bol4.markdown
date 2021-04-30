@@ -28,6 +28,7 @@ date: 2021-04-30 22:00:00
 내가 날 찾아줄까 봐
 </blockquote>
 <br>
+
 <img class="col three" src="/img/bol42.jpg" width="500" height="300"/>
 
 <br>
