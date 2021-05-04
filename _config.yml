@@ -25,5 +25,8 @@ collections:
   poetry:
     output: true
     permalink: /poetry/:path/
+  deep_learning:
+    output : true
+    permalink: /deep_learning/:path/
 
 
