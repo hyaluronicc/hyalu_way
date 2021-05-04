@@ -1,0 +1,48 @@
+---
+layout: post
+title: vision 커리큘럼
+date: 2021-05-03 19:00:00
+---
+
+|수업차수| 수업내용|
+|---|---|
+|1|인공지능 개론 및 사례|
+|2|Neural Network 이해|
+|3|Backpropagation 이해|
+|4|Linear Regression & Classification|
+|5|Convolutional Neural Network 원리|
+|6|Convolutional Neural Network 이해|
+|7|특강|
+|8|Classification: VGG 16, 19|
+|9|Classification: VGG 16, 19 transfer learning|
+|10|Classification: Residual Network 1|
+|11|Classification: Residual Network 2|
+|12|특강|
+|13|Classification: Dense Network|
+|14|Classification: Dense Network, Inception Network|
+|15|Segmentation: U-Net 구조 이해|
+|16|Segmentation: U-Net 구조 설계|
+|17|Segmentation: Res U-Net, Dens U-Net 1|
+|18|Segmentation: Res U-Net, Dens U-Net 2|
+|19|Segmentation: Custom Loss function|
+|20|특강|
+|21|Object Detection: YOLO 이해|
+|22|Object Detection: YOLO 이해|
+|23|Object Detection: YOLO transfer learning 1|
+|24|Object Detection: YOLO transfer learning 2|
+|25|특강|
+|26|Autoencoder, Variational Autoencoder|
+|27|Autoencoder, Variational Autoencoder|
+|28|Style Transfer|
+|29|GAN 이해 및 실습 1|
+|30|GAN 이해 및 실습 2|
+|31|DCGAN 이해 및 실습 1|
+|32|DCGAN 이해 및 실습 2|
+|33|특강|
+|34|Cycle GAN 이해 및 실습 1|
+|35|Cycle GAN 이해 및 실습 2|
+|36|팀 프로젝트 1|
+|37|팀 프로젝트 2|
+|38|팀 프로젝트 3|
+|39|팀 프로젝트 4|
+|40|종강|
