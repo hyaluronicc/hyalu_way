@@ -1,0 +1,14 @@
+---
+layout: post
+title: deep-learning 기본
+date: 2021-05-03 19:00:00
+---
+
+실습은 Colab에서 진행
+
+{% highlight python %}
+
+%tensorflow_version 1.x
+
+
+{% endhighlight %}
