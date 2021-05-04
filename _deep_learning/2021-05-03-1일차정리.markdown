@@ -60,9 +60,10 @@ d = a*b+c
 print(d)
 
 {% endhighlight %}
+<br>
+<br>
 
 ### Tensorflow 1.x로 실습
-<br>
 <br>
 
 {% highlight python %}
