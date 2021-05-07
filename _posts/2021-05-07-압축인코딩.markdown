@@ -26,10 +26,19 @@ description: COPY 압축 인코딩
 <br>
 
 {% highlight sql %}
-
+-- 일단 redshift 테이블이 비어있어야 함
 truncate biglist;
 
+copy biglist from 's3://mybucket/biglist.txt' 
+iam_role 'arn:aws:iam::0123456789012:role/MyRedshiftRole'
+delimiter '|' COMPUPDATE ON;
 
 
+--자동 인코딩 검토
+select "column", type, encoding 
+from pg_table_def where tablename = 'biglist';
+
+--예상 행 로드 확인
+select count(*) from biglist;
 
 {% endhighlight %}
