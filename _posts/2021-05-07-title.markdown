@@ -1,0 +1,42 @@
+---
+layout: post
+title: AWS Redshift 데이터 적재 모범사례(COPY)
+date: 2021-05-07 16:57:00
+description: COPY 명령 빠르게 사용
+---
+
+참고
+* 데이터 로드: <a href="https://docs.aws.amazon.com/ko_kr/redshift/latest/dg/c_loading-data-best-practices.html " target="blank">https://docs.aws.amazon.com/ko_kr/redshift/latest/dg/c_loading-data-best-practices.html</a>
+
+* 자습서: <a href="https://docs.aws.amazon.com/ko_kr/redshift/latest/dg/tutorial-loading-data.html " target="blank">https://docs.aws.amazon.com/ko_kr/redshift/latest/dg/tutorial-loading-data.html</a>
+
+<br>
+<br>
+
+### 단계 5: COPY 명령 실행
+<br>
+
+* REGION
+
+가능하다면 항상 Amazon Redshift 클러스터와 동일한 AWS 리전에 로드 데이터를 위치시켜야 합니다. 데이터와 클러스터가 동일한 리전에 있는 경우 지연 시간이 줄어들고 리전 간 데이터 전송 비용을 피할 수 있습니다. 
+<br>
+-> Redshift 와 S3의 리전을 동일하게 맞춰줘야 서로 간 COPY 명령으로 이동시 이득을 볼 수 있음
+<br>
+<br>
+
+리전이 다를 경우 확인 필요
+<br>
+
+-> 다른 AWS 리전에서 데이터를 로드해야 하는 경우, REGION 옵션을 사용하여 로드 데이터가 위치한 AWS 리전을 지정합니다. 리전을 지정하는 경우, 매니페스트 파일을 포함한 모든 로드 데이터가 명명된 리전에 있어야 합니다. 
+
+* 예시 COPY문
+
+{% highlight sql %}
+
+copy supplier from 's3://<버켓 이름>/load/supplier.tbl' 
+iam role 'aws ~~' 
+delimiter '|' 
+gzip
+region 'us-east-1';
+
+{% endhighlight %}
