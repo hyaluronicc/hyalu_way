@@ -57,6 +57,8 @@ Identity and Access Management = IAM
 # Step 4: Authorize access to the cluster
 Redshift 내에서 모든 쿼리 처리를 다 한다면 굳이 상관없겠지만(클러스터에 VPC-virtual private cloud 기반 Amazon VPC 서비스를 사용해 접근한다면 상관없음), SQL 클라이언트를 사용해 클러스터로 접근하려면 inbound 접근을 줘야 한다. 
 
+
+0. 먼저 클러스터 일반 정보 밑 속성 탭에서 **Network and security settings** 항목 중 VPC 외부의 인스턴스 및 디바이스가 클러스터 엔드포인트를 통해 데이터베이스에 연결되도록 허용 **활성화** 로 체크해줘야 외부에서 액세스 가능하다. 활성화 해주도록.
 1. 이 경우 vpc 콘솔로 들어간다.
  
  <a href="https://console.aws.amazon.com/vpc/ " target="blank">https://console.aws.amazon.com/vpc/</a>
