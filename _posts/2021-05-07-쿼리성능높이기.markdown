@@ -1,0 +1,12 @@
+---
+layout: post
+title: AWS Redshift 쿼리 성능 높이기
+date: 2021-05-07 17:58:00
+description: 분산키, 정렬키
+---
+
+to be continued
+
+<br>
+
+https://docs.aws.amazon.com/ko_kr/redshift/latest/dg/t_Sorting_data.html
