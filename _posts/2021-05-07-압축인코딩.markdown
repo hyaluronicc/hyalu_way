@@ -12,3 +12,24 @@ description: COPY 압축 인코딩
 
 압축 인코딩은 테이블을 생성할 때 지정할 수 있지만 대부분의 경우 자동 압축을 사용하면 최상의 결과를 얻을 수 있음.
 
+<br>
+<br>
+ 
+### 자동 압축 예
+<br>
+-조건
+
+<br>
+* 테이블이 비어있어야 함
+
+<br>
+<br>
+
+{% highlight sql %}
+
+truncate biglist;
+
+
+
+
+{% endhighlight %}
