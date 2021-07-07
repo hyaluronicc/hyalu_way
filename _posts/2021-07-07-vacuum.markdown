@@ -1,0 +1,179 @@
+---
+layout: post
+title: AWS Redshift Vacuum
+date: 2021-05-07 16:57:00
+description: 테이블 최적화
+---
+
+# 1. Analyze
+<br>
+
+Redshift는 통계 정보로 쿼리 계획을 만듦
+
+따라서 통계 정보가 효율적이지 않다면 쿼리 성능이 나빠질 수 있음(예: 조인, 정렬)
+
+<br>
+<br>
+
+### 테이블 최적화 및 분석이 진행되는 경우
+* CREATE TABLE AS(CTAS)
+* CREATE TEMP TABLE AS
+* SELECT INTO
+* COPY FROM ... STATUPDATE ON
+
+<br>
+<br>
+자동분석(Auto analyze)이 기본적으로 활성화되어 통계 정보가 업데이트 됨 but 통계정보가 누락되거나 부실한 통계 정보가 발생함
+
+* 확인 쿼리
+{% highlight sql %}
+
+--누락된 통계 정보 확인 쿼리
+SELECT trim(plannode) AS plannode, COUNT(*) query_count
+FROM stl_explain
+WHERE plannode LIKE '%missing statistics%'
+AND plannode NOT LIKE '%redshift_auto_health_check_%'
+GROUP BY plannode
+ORDER BY 2 DESC
+;
+
+--부실한 통계 정보 확인 쿼리
+SELECT database, schema || '.' || "table" AS "table", stats_off
+FROM svv_table_info
+WHERE stats_off > 5
+ORDER BY 2
+;
+
+--대용량 테이블 분석시 주 컬럼으로 수행 가능
+ANALYZE <테이블명> (컬럼1, 컬럼2);
+
+{% endhighlight %}
+
+<br>
+<br>
+
+# 2. Vacuum
+
+<br>
+
+Redshift는 불변 블록(data blocks are immutable). 따라서 행이 삭제되면 논리적으로 삭제 마킹을 하고 블록에 남아있음. 업데이트 또한 기존 데이터는 삭제 마킹만 됨. -> <b>시스템 공간 낭비, 성능 저하<b>
+
+<br>
+
+<b>Vacuum<b> : 삭제된 행 정리 및 삭제 공간 클러스터에 반환, 데이터 블록 재정렬해주는 작업. 4가지 유형이 있음(default: VACUUM FULL)
+
+<br>
+
+<br>
+
+### 2-1. VACUUM SORT ONLY
+<br>
+
+: 테이블에 정의된 소트키를 기준으로 데이터 정렬. 데이터 입력시 디스크의 정렬되지 않은 구간으로 저장. 기존 정렬 구간과 병합.
+
+<br>
+
+### 2-2. VACUUM DELETE ONLY
+: 삭제 마킹된 데이터를 정리. 
+
+<br>
+
+### 2-3. VACUUM FULL
+<br>
+: SORT ONLY 와 DELETE ONLY의 작업 함께 수행. 정렬되지 않은 데이터를 정렬하고 기존 데이터와 병합한 뒤 삭제 마킹된 데이터 블록을 정리해 가용 공간을 확보. DELETE & INSERT 작업 후 실행해주면 좋음
+
+<br>
+
+### 2-4. VACUUM REINDEX
+
+<br>
+
+: Interleaved sort key (인터리브 소트키) 를 사용하고 시간이 지나면 데이터 정렬 비율이 떨어짐. Date, Timestamp의 경우 데이터 스큐가 발생함. 이때 정렬 키를 다시 분석해서 성능을 분석하는데 사용함. 시간이 오래 걸림. 
+<br>
+
+<br>
+
+# 3. Auto Vacuum
+<br>
+자동으로 VACUUM DELETE ONLY 가 수행. 
+
+<br>
+
+# 4. Deep Copy
+<br>
+: 대용량 테이블이 20% 이상 정렬되지 않은 데이터를 갖고 있다면 Vacuum보다 Deep Copy가 시스템 자원, 수행시간 면에서 빠름.
+<br>
+
+주의할 점은 원본 테이블을 임시테이블 생성 시 이관할 때 원본 테이블이 반드시 이관 완료될 떄까지 삭제되지 않도록 해야함 -> TEMP 테이블 생성보다 그냥 테이블을 하나 더 만들어서 복사하는 게 나음
+<br>
+<br>
+
+### 4-1. 테이블 재생성
+<br>
+CREATE TABLE
+
+{% highlight sql %}
+
+CREATE TABLE <임시테이블명> ;
+INSERT INTO <임시테이블명> (SELECT * FROM EXAMPLE);
+ALTER TABLE <원본테이블명> RENAME TO <백업테이블명>;
+ALTER TABLE <임시테이블명> RENAME TO <원본테이블명>;
+--원본 테이블 데이터 확인 후 백업 테이블 삭제
+DROP TABLE <백업테이블명>
+
+{% endhighlight %}
+
+<br>
+
+### 4-2. CRAETE TABLE LIKE 사용
+<br>
+원본 테이블의 스키마를 복제한 후 딥 카피
+<br>
+
+{% highlight sql %}
+
+CREATE TABLE <임시테이블명> ( LIKE example);
+INSERT INTO <임시테이블명> (SELECT * FROM <원본테이블명>);
+ALTER TABLE <원본테이블명> RENAME TO <백업테이블명>;
+ALTER TABLE <임시테이블명> RENAME TO <원본테이블명>;
+--원본 테이블 데이터 확인 후 백업 테이블 삭제
+DROP TABLE <백업테이블명>;
+
+{% endhighlight %}
+
+<br>
+
+### 4-3. CTAS 사용
+<br>
+
+{% highlight sql %}
+
+CREATE TABLE <임시테이블명> AS SELECT * FROM <원본테이블명>;
+
+--임시 테이블의 데이터 확인 후, 원본 테이블 데이터 삭제
+TRUNCATE <원본테이블명>;
+INSERT INTO <원본테이블명> (SELECT * FROM <임시테이블명>);
+
+--원본 테이블 데이터 확인 후 임시 테이블 삭제
+DROP TABLE <임시테이블명>;
+
+{% endhighlight %}
+
+<br>
+
+# 5. 데이터의 균형
+<br>
+
+좋은 분산 키
+* 높은 카디널리티 : 클러스터 슬라이스에 데이터가 고르게 분포될 수 있도록 고유 데이터 수가 높아야 함
+* 균일 분포/ 낮은 스큐 : 분산키 컬럼의 각 고유 값은 비슷한 횟수만큼 발생해야 함. 컬럼 값을 히스토그램으로 표현했을 때 데이터 분포도가 높아야 함(그래야 각 슬라이스에서 비슷한 레코드 수를 담당). 
+* 조인키: 분산키는 조인에 가장 자주 사용되는 컬럼이어야 함. 비슷한 빈도수라면 가장 많은 데이터를 조인하는 컬럼 선택
+
+<br>
+
+적절한 분산키가 없다면 균등 분산(EVEN)으로 변경하는 것이 더 효과적.
+
+<br>
+
+테이블이 작다면 DISTSTYLE ALL 선택해 데이터를 모든 노드의 첫 번째 슬라이스에 저장.
+
