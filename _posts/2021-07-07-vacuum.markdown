@@ -16,6 +16,8 @@ Redshift는 통계 정보로 쿼리 계획을 만듦
 <br>
 
 ### 테이블 최적화 및 분석이 진행되는 경우
+<br>
+
 * CREATE TABLE AS(CTAS)
 * CREATE TEMP TABLE AS
 * SELECT INTO
@@ -172,7 +174,6 @@ DROP TABLE <임시테이블명>;
 <br>
 
 적절한 분산키가 없다면 균등 분산(EVEN)으로 변경하는 것이 더 효과적.
-
 <br>
 
 테이블이 작다면 DISTSTYLE ALL 선택해 데이터를 모든 노드의 첫 번째 슬라이스에 저장.
