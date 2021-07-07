@@ -1,7 +1,7 @@
 ---
 layout: post
 title: AWS Redshift Vacuum
-date: 2021-05-07 16:57:00
+date: 2021-07-07 16:12:00
 description: 테이블 최적화
 ---
 
