@@ -28,5 +28,8 @@ collections:
   deep_learning:
     output : true
     permalink: /deep_learning/:path/
+  dopamine_fast:
+    output : true
+    permalink: /dopamine_fast/:path/
 
 
